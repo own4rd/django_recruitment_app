@@ -72,3 +72,13 @@ class TestPostCompanies(BasicCompanyApiTestCase):
         response = self.client.post(path=self.companies_url, data={"name": "test company name", "status": "layoffs"})
         self.assertEqual(response.status_code, 400)
         self.assertIn("is not a valid choice", str(response.content))
+
+
+def raise_covid19_exception() -> None:
+    raise ValueError("CoronaVirus Exception")
+
+def test_raise_covid19_exception_shoould_pass() -> None:
+    with pytest.raises(ValueError) as e:
+        raise_covid19_exception()
+
+    assert "CoronaVirus Exception" == str(e.value)
