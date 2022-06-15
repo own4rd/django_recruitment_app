@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 class Company(models.Model):
     class CompanyStatus(models.TextChoices):
-        LAYOFFS = _("Demissões")
+        LAYOFFS = _("Layoffs")
         HIRING_FREEZE = _("Contratação parada")
         HIRING = _("Contratando")
 
