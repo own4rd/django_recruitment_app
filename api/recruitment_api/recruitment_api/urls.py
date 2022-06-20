@@ -6,6 +6,5 @@ from companies.urls import companies_router
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(companies_router.urls)),
-    path("send-email", send_company_email)
+    path("send-email", send_company_email),
 ]
-
