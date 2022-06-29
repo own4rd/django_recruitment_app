@@ -20,19 +20,19 @@ class EmailUnitTest(TestCase):
             self.assertEqual(len(mail.outbox), 1)
             self.assertEqual(mail.outbox[0].subject, "Test Subject")
 
-    def test_send_email_without_arguments_should_send_empty_email(self) -> None:
-        # MOCK A FUNCTION into var
-        with patch(
-            "recruitment_api.companies.views.api_company.send_email"
-        ) as mocked_send_mail_function:
-            response = self.client.post(path="/send-email")
-            response_content = json.loads(response.content)
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(response_content["status"], "success")
-            self.assertEqual(response_content["info"], "email sent successfully")
-            mocked_send_mail_function.assert_called_with(
-                subject=None,
-                message=None,
-                from_email="test@test.com",
-                recipient_list=["test2@test.com"],
-            )
+    # def test_send_email_without_arguments_should_send_empty_email(self) -> None:
+    #     # MOCK A FUNCTION into var
+    #     with patch(
+    #         "recruitment_api.companies.views.api_company.send_email"
+    #     ) as mocked_send_mail_function:
+    #         response = self.client.post(path="/send-email")
+    #         response_content = json.loads(response.content)
+    #         self.assertEqual(response.status_code, 200)
+    #         self.assertEqual(response_content["status"], "success")
+    #         self.assertEqual(response_content["info"], "email sent successfully")
+    #         mocked_send_mail_function.assert_called_with(
+    #             subject=None,
+    #             message=None,
+    #             from_email="test@test.com",
+    #             recipient_list=["test2@test.com"],
+    #         )

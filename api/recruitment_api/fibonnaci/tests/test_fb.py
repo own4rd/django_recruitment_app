@@ -1,5 +1,6 @@
 from typing import Callable, Dict, List, Tuple
 import pytest
+from fibonnaci.fixtures import time_tracker
 from fibonnaci.cached import fibonacci_cached, fibonacci_lru_cached
 from fibonnaci.naive import fibonacci_naive
 
@@ -55,6 +56,6 @@ def test_cached(n: int, expected: int) -> None:
 # Refactor
 @pytest.mark.parametrize("fib_func", [fibonacci_naive, fibonacci_cached, fibonacci_lru_cached])
 @pytest.mark.parametrize("n,expected", [(0, 0), (1, 1), (2, 1), (20, 6765)])
-def test_fibonacci(fib_func: Callable[[int], int], n: int, expected: int) -> None:
+def test_fibonacci(time_tracker, fib_func: Callable[[int], int], n: int, expected: int) -> None:
     res = fib_func(n)
     assert res == expected
