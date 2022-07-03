@@ -47,6 +47,7 @@ def test_naive(n: int, expected: int) -> None:
     res = fibonacci_naive(n)
     assert res == expected
 
+
 @my_parametrized(identifiers="n,expected", values=[(0, 0), (1, 1), (2, 1), (20, 6765)])
 def test_cached(n: int, expected: int) -> None:
     res = fibonacci_cached(n)
@@ -54,8 +55,12 @@ def test_cached(n: int, expected: int) -> None:
 
 
 # Refactor
-@pytest.mark.parametrize("fib_func", [fibonacci_naive, fibonacci_cached, fibonacci_lru_cached])
+@pytest.mark.parametrize(
+    "fib_func", [fibonacci_naive, fibonacci_cached, fibonacci_lru_cached]
+)
 @pytest.mark.parametrize("n,expected", [(0, 0), (1, 1), (2, 1), (20, 6765)])
-def test_fibonacci(time_tracker, fib_func: Callable[[int], int], n: int, expected: int) -> None:
+def test_fibonacci(
+    time_tracker, fib_func: Callable[[int], int], n: int, expected: int
+) -> None:
     res = fib_func(n)
     assert res == expected
