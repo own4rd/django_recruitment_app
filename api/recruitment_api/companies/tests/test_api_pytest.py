@@ -29,11 +29,6 @@ def test_one_companies_should_return_empty_list(client) -> None:
     assert response_content.get("notes") == ""
 
 
-@pytest.fixture
-def amazon() -> Company:
-    return Company.objects.create(name="amazon")
-
-
 def test_one_company_exists_should_succeed(client, amazon) -> None:
     response = client.get(companies_url)
     response_content = json.loads(response.content)[0]
@@ -89,28 +84,6 @@ def test_create_company_with_wrong_status_should_fail(client) -> None:
 
 
 # -------------------- Fixtures --------------
-
-
-@pytest.fixture
-def companies(request, company):
-    """
-    request: This is a pytest request type
-    """
-    companies = []
-    names = request.param
-    for name in names:
-        companies.append(company(name=name))
-
-    return companies
-
-
-@pytest.fixture
-def company(**kwargs):
-    def _company_factory(**kwargs) -> Company:
-        company_name = kwargs.pop("name", "Test Company INC")
-        return Company.objects.create(name=company_name, **kwargs)
-
-    return _company_factory
 
 
 def old_test_multiple_companies_exists_should_succeed(client, company) -> None:
